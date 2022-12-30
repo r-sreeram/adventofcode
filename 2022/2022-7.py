@@ -3,6 +3,10 @@
 
 import collections, itertools
 
+# Straight-forward simulation of the commands with a small trick to ignore some
+# parts of the input that are not necessary for the solution. This assumes that
+# the input will never have the same file listed twice.
+
 cwd = ["/"]
 sizes = collections.defaultdict(int)
 for line in open(0):
