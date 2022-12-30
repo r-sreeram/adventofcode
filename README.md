@@ -4,8 +4,8 @@ Solutions to Advent of Code (<https://adventofcode.com>) problems.
 
 ## How to use
 
-All Python programs take input from standard input and write the solution to standard output, one line per part.
-Usually this means two lines of output, but there are exceptions:
+All Python programs take input from standard input and write the solution to standard output, one line per part. Usually
+this means two lines of output, but there are exceptions:
 
 * Day 25 for every year has only one part, so there's only one output line.
 * Some solutions need OCR. Programs for those days use a hard-coded set of letter shapes in `lib/ocr.py` to output the
@@ -23,5 +23,5 @@ optimizations), please do send me pull requests!
 ## Work in progress
 
 My goal is to fill out solutions for all problems for all years, but I'm far from achieving that goal. I also want to
-add solutions in other languages, such as Go, Java/Scala/Kotlin, Typescript and Rust. This repo is a work in progress.
-I'll add more solutions as I get time. Check back from time to time!
+add solutions in other languages, such as C++, Go, Java/Scala/Kotlin, Typescript and Rust. This repo is a work in
+progress. I'll add more solutions as I get time. Check back from time to time!
