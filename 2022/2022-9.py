@@ -1,6 +1,9 @@
 # Day 9: Rope Bridge
 # https://adventofcode.com/2022/day/9
 
+# The move() function moves the tail one step closer to the head, in 1-D. By
+# doing it for both coordinates in 2-D, we achieve the desired result.
+
 knot = [0] * 10
 move = lambda h, t: t + (h > t) - (h < t)
 
