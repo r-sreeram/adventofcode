@@ -3,6 +3,9 @@
 
 # Inspired by 4HbQ: https://www.reddit.com/r/adventofcode/comments/zjnruc/2022_day_12_solutions/izw63we/
 
+# We do a breadth-first search (BFS) starting with "E", and stop when we get to
+# "S". Along the way, we note down the shortest distance to any "a".
+
 grid = {c + r * 1j: ord(char) - ord("a") for r, row in enumerate(open(0)) for c, char in enumerate(row)}
 S = next(k for k, v in grid.items() if v == ord("S") - ord("a"))
 E = next(k for k, v in grid.items() if v == ord("E") - ord("a"))
