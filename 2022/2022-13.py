@@ -20,5 +20,7 @@ def cmp(a, b):
 packets = [eval(line) for line in open(0).read().split()]
 print(sum([i // 2 + 1 for i in range(0, len(packets), 2) if cmp(packets[i], packets[i + 1]) < 0]))
 
+# A three-way check would have ~33% fewer comparisons (i.e., if cmp(p, 2) < 0,
+# there's no need to check cmp(p, 6)), but results in less elegant code.
 pos = [sum(cmp(p, divider) < 0 for p in packets) for divider in (2, 6)]
 print((pos[0] + 1) * (pos[1] + 2))
