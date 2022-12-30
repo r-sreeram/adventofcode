@@ -19,16 +19,16 @@ for monkey in open(0).read().split("\n\n"):
 N = math.lcm(*mods)
 
 
-def solve(v, n, d):
-    counts = [0] * len(v)
-    for _, m in itertools.product(range(n), range(len(v))):
-        counts[m] += len(v[m])
-        for item in v[m]:
-            worry = ops[m](item) // d % N
-            v[targets[m][worry % mods[m] == 0]].append(worry)
-        v[m] = []
-    return math.prod(sorted(counts)[-2:])
+def solve(items, num_rounds, divisor):
+    counts = [0] * len(items)
+    for _, m in itertools.product(range(num_rounds), range(len(items))):
+        counts[m] += len(items[m])
+        for item in items[m]:
+            worry = ops[m](item) // divisor % N
+            items[targets[m][worry % mods[m] == 0]].append(worry)
+        items[m] = []
+    print(math.prod(sorted(counts)[-2:]))
 
 
-print(solve(copy.deepcopy(items), 20, 3))
-print(solve(items, 10000, 1))
+solve(copy.deepcopy(items), 20, 3)
+solve(items, 10000, 1)
