@@ -7,7 +7,7 @@ rows = open(0).read().splitlines()
 cols = list(zip(*rows))
 
 is_visible = lambda trees: all(h < trees[0] for h in trees[1:])
-view_distance = lambda trees: min((i for i, h in enumerate(trees[1:], 1) if h >= trees[0]), default=len(trees) - 1)
+view_distance = lambda trees: next((i for i, h in enumerate(trees[1:], 1) if h >= trees[0]), len(trees) - 1)
 
 part1, part2 = 0, 0
 for r, c in itertools.product(range(len(rows)), range(len(cols))):
