@@ -5,6 +5,11 @@
 
 import itertools, re
 
+# Aside from the straight-forward simulation, a major optimization here is to
+# start the next unit of sand at the last position of the previous sand (before
+# it came to rest) instead of all the way back at the top, since it would have
+# traversed the same path until that point anyway.
+
 grid = set()
 for points in ((int(x) + int(y) * 1j for x, y in re.findall("(\d+),(\d+)", line)) for line in open(0)):
     for p1, p2 in itertools.pairwise(points):
