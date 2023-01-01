@@ -3,10 +3,17 @@
 
 # Inspired by 4HbQ: https://www.reddit.com/r/adventofcode/comments/zqezkn/2022_day_20_solutions/j0y04h2/
 
-# Instead of shuffling the numbers directly, we shuffle pointers to the numbers
-# (indices). The "for i in indices * repeat" not only produces the right number
-# of repetitions, but it also creates a temporary list, so we can modify the
-# original indices list inside the loop without causing problems.
+# Instead of shuffling the input numbers directly, we shuffle the indices of the
+# numbers. This has the nice property that we can use list.index(...) to find
+# the entry, since indices are unique (whereas the input numbers are not).
+
+# Another nice touch is the use of "indices * repeat" for the loop. Not only
+# does this produce the desired repetitions, but it also creates a temporary
+# list, so we can modify the original indices list inside the loop, without
+# causing problems.
+
+# Note the use of len(indices). The more natural expression is len(numbers) - 1,
+# but since we just did indices.pop() on the previous line, they are the same.
 
 
 def solve(repeat):
