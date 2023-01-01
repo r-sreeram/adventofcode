@@ -26,7 +26,6 @@ while path:
             part1 = len(grid) - start if part1 == 0 else part1
     except StopIteration:
         pass
-    grid.add(path[-1])
-    del path[-1]
+    grid.add(path.pop())
 print(part1)
 print(len(grid) - start)
