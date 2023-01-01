@@ -20,6 +20,16 @@ start, floor = len(grid), max(p.imag for p in grid)
 part1, path = 0, [500]
 while path:
     try:
+        # Two ways this loop stops:
+        # (1) When the sand falls below the lowest rock, the loop condition is
+        #     false, and the "else" clause is executed. Part 1's solution is the
+        #     number of units of sand that have settled the first time this
+        #     happens (= len(grid) - start if part1 == 0). Since there's an
+        #     infinite floor right below this point, the sand will settle at
+        #     this point anyway.
+        # (2) When the sand is blocked by sand/rock at all three positions below
+        #     it, next() can't find a match and raises StopIteration. The sand
+        #     settles at this point.
         while path[-1].imag <= floor:
             path.append(next(p for d in (1j, -1 + 1j, 1 + 1j) if (p := path[-1] + d) not in grid))
         else:

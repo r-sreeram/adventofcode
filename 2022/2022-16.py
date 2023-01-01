@@ -5,6 +5,22 @@
 
 import collections, math, re
 
+# For Part 1, we can do a straight-forward DFS, made slightly more efficient by
+# precomputing all pairwise distances between rooms that have some flow, and
+# considering only those rooms in the search. Along the way, we keep track of
+# the max total flow achieved for every combination of opened valves; the max
+# amongst them is of course the solution.
+
+# For Part 2, we do the same thing as in Part 1 (except starting with a smaller
+# amount of time remaining). Since `best` contains every possible combination of
+# valves that can be opened, one of those will be the set we open, and another
+# one of those will be the set the elephant opens (since we and the elephant
+# start at the same room and have the same amount of time). These sets have to
+# be disjoint, since we can't open the same valve twice (hence k1 & k2 == 0).
+
+# There are alternative approaches, but this turns out to be the fastest.
+
+# bits and rate are not populated for rooms with zero flow.
 rate, edge, bits = {}, {}, {}
 for line in open(0):
     id, flow, *valves = re.findall("\d+|[A-Z]{2}", line)
@@ -13,18 +29,27 @@ for line in open(0):
         bits[id] = 1 << len(rate)
         rate[id] = int(flow)
 
+# All pairs shortest paths (Floyd-Warshall). These explicit loops are measurably
+# faster than the more compact itertools.product(edge, repeat=3).
 for k in edge:
     for i in edge:
         for j in edge:
             edge[i][j] = min(edge[i][j], edge[i][k] + edge[k][j])
 
-
+# We are at room u, with `time` minutes remaining. `opened` is a bitmask of
+# valves that have been opened so far. Room u's valve has already been opened
+# (except in the case of the starting room, see line 50 below). `flow` is the
+# total flow achieved so far (each opened valve has already accounted for future
+# flow till time runs out).
 def solve(time, best, u="AA", flow=0, opened=0):
     best[opened] = max(best.get(opened, 0), flow)
     for v, r in rate.items():
-        if r and not opened & (b := bits[v]) and (dist := edge[u][v]) < time - 1:
+        # If v hasn't been opened yet and there's time to reach it and open it,
+        # then do so, add its flow (till the end of time) and recurse.
+        if opened & (b := bits[v]) == 0 and (dist := edge[u][v]) + 1 < time:
             solve(time - 1 - dist, best, v, flow + r * (time - 1 - dist), opened | b)
-    if (r := rate.get(u, 0)) and not opened & (b := bits[u]):
+    # Handle the case where the starting room ("AA") has non-zero flow.
+    if (r := rate.get(u, 0)) and opened & (b := bits[u]) == 0:
         solve(time - 1, best, u, r * (time - 1), b)
     return best
 
