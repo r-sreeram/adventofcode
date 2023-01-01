@@ -3,6 +3,11 @@
 
 # Inspired by 4HbQ: https://www.reddit.com/r/adventofcode/comments/zqezkn/2022_day_20_solutions/j0y04h2/
 
+# Instead of shuffling the numbers directly, we shuffle pointers to the numbers
+# (indices). The "for i in indices * repeat" not only produces the right number
+# of repetitions, but it also creates a temporary list, so we can modify the
+# original indices list inside the loop without causing problems.
+
 
 def solve(repeat):
     indices = list(range(len(numbers)))
