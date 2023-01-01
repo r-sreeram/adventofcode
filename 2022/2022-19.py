@@ -52,9 +52,9 @@ def solve(t, a=0, b=0, c=0, d=0, p=1, q=0, r=0, s=0, goal=ORE | CLAY | OBSIDIAN 
     global best
     if t == 0:
         best = max(best, d)
-        return
+        return best
     if d + s * t + t * (t - 1) // 2 <= best:
-        return
+        return best
     done = 0
     if t >= 2 and a >= cost[4] and c >= cost[5] and goal & GEODE:
         solve(t - 1, a + p - cost[4], b + q, c + r - cost[5], d + s, p, q, r, s + 1)
@@ -70,16 +70,15 @@ def solve(t, a=0, b=0, c=0, d=0, p=1, q=0, r=0, s=0, goal=ORE | CLAY | OBSIDIAN 
         done |= ORE
     if goal ^ done:
         solve(t - 1, a + p, b + q, c + r, d + s, p, q, r, s, goal ^ done)
+    return best
 
 
 part1, part2 = 0, 1
 for line in open(0):
     id, *cost = (int(n) for n in re.findall("\d+", line))
     best = 0
-    solve(24)
-    part1 += id * best
+    part1 += id * solve(24)
     if id <= 3:
-        solve(32)
-        part2 *= best
+        part2 *= solve(32)
 print(part1)
 print(part2)
