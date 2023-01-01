@@ -5,11 +5,11 @@
 
 import collections, math, re
 
-# For Part 1, we can do a straight-forward DFS, made slightly more efficient by
-# precomputing all pairwise distances between rooms that have some flow, and
-# considering only those rooms in the search. Along the way, we keep track of
-# the max total flow achieved for every combination of opened valves; the max
-# amongst them is of course the solution.
+# For Part 1, we can do a simple depth-first search (DFS), made slightly more
+# efficient by precomputing all pairwise distances between rooms that have some
+# flow, and considering only those rooms in the search. Along the way, we keep
+# track of the max total flow achieved for every combination of opened valves;
+# the max amongst them is of course the solution.
 
 # For Part 2, we do the same thing as in Part 1 (except starting with a smaller
 # amount of time remaining). Since `best` contains every possible combination of

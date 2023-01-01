@@ -5,6 +5,44 @@
 
 import re
 
+# The algorithm for both parts is essentially a brute-force depth-first search.
+# The search space is huge (especially for Part 2), so we make it tractable with
+# a few optimizations:
+
+# + The absolute best-case scenario is if we assume that we'll somehow be able
+#   to make a geode-cracking robot every turn from now until time runs out. In
+#   that wildly optimistic scenario, the number of geodes we'll have is
+#       =   d (geodes we already have)
+#         + s * t (geodes our existing geode robots will open)
+#         + t * (t - 1) / 2 (geodes opened by the robots we'll make every turn)
+#   If that's not going to improve the `best` seen so far, stop. Hence:
+#       if d + s * t + t * (t - 1) // 2 <= best: return
+
+# + If we were able to make a certain type of robot (`done`) this turn, there's
+#   no point trying an alternative search path where we DON'T make any robot
+#   (and simply wait) this turn, and then try to make that robot (`goal`) in the
+#   future. This only applies to waiting (doing nothing this turn). If instead
+#   of making that robot, we make some other robot this turn, then of course, we
+#   can try to make the former robot in the future. Hence:
+#       if (goal ^ done): solve(..., goal ^ done)
+
+# + There's no point making a robot if it's not going to produce anything useful
+#   in time for opening geodes. For example:
+#   o No point making a geode robot on the last turn (t = 1). Hence:
+#         if (t >= 2 and ...): solve(..., s + 1)  # make a geode robot
+#   o No point making an obsidian robot on the last 3 turns (t <= 3), because
+#     any obsidian it produces cannot be used for making geode bots in time:
+#         if (t >= 4 and ...): solve(..., r + 1, ...)  # make an obsidian robot
+#   ... and so on for clay and ore robots.
+
+# + If we have enough "ore capacity", no point making any more ore robots. By
+#   "ore capacity", we mean the amount of ore we have (`a`) plus what we expect
+#   to make in the future given the ore robots we have (`p`). By "enough", we
+#   mean that even if we needed a lot of ore every turn (= max of all the ore
+#   requirements) to make some type of robot, we are good. Hence:
+#       if (... a < (max(...) - p) * (t - 2) and ...):  # make an ore robot
+#   Likewise for clay and obsidian capacity.
+
 ORE, CLAY, OBSIDIAN, GEODE = 1, 2, 4, 8
 
 # t = time remaining, goal = target robot types (bitmask)

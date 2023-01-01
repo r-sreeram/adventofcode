@@ -7,9 +7,10 @@
 # connected faces.
 
 # For Part 2, we do a "flood fill". I.e., starting from a cube known to be
-# outside all other cubes, we do a DFS to reach all outside cubes (within a
-# bounding box). Whenever the DFS is blocked, we have run into an outside face
-# of a cube in our input set. The number of such faces is our desired answer.
+# outside all other cubes, we do a depth-first search (DFS) to reach all outside
+# cubes (within a bounding box). Whenever the DFS is blocked, we have run into
+# an outside face of a cube in our input set. The number of such faces is our
+# desired answer.
 
 DXYZ = ((-1, 0, 0), (1, 0, 0), (0, -1, 0), (0, 1, 0), (0, 0, -1), (0, 0, 1))
 adjacent = lambda cube: {tuple(sum(c) for c in zip(cube, d)) for d in DXYZ}
