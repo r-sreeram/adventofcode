@@ -1,6 +1,16 @@
 # Day 18: Boiling Boulders
 # https://adventofcode.com/2022/day/18
 
+# For Part 1, for each cube, for each of its 6 faces, the face is "connected"
+# to an adjacent cube if that adjacent cube is in our input set. The desired
+# answer is the total number of faces (6 * cubes) minus the number of these
+# connected faces.
+
+# For Part 2, we do a "flood fill". I.e., starting from a cube known to be
+# outside all other cubes, we do a DFS to reach all outside cubes (within a
+# bounding box). Whenever the DFS is blocked, we have run into an outside face
+# of a cube in our input set. The number of such faces is our desired answer.
+
 DXYZ = ((-1, 0, 0), (1, 0, 0), (0, -1, 0), (0, 1, 0), (0, 0, -1), (0, 0, 1))
 adjacent = lambda cube: {tuple(sum(c) for c in zip(cube, d)) for d in DXYZ}
 
