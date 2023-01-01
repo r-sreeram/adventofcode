@@ -7,10 +7,8 @@
 # "S". Along the way, we note down the shortest distance to any "a".
 
 grid = {c + r * 1j: ord(char) - ord("a") for r, row in enumerate(open(0)) for c, char in enumerate(row)}
-S = next(k for k, v in grid.items() if v == ord("S") - ord("a"))
-E = next(k for k, v in grid.items() if v == ord("E") - ord("a"))
-grid[S] = 0
-grid[E] = 25
+S, E = (next(k for k, v in grid.items() if v == ord(char) - ord("a")) for char in "SE")
+grid[S], grid[E] = 0, 25
 best, dist, seen, poss = 0, 0, {E}, {E}
 while S not in poss:
     dist += 1
