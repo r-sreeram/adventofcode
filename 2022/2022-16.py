@@ -38,7 +38,7 @@ for k in edge:
 
 # We are at room u, with `time` minutes remaining. `opened` is a bitmask of
 # valves that have been opened so far. Room u's valve has already been opened
-# (except in the case of the starting room, see line 50 below). `flow` is the
+# (except in the case of the starting room, see line 52 below). `flow` is the
 # total flow achieved so far (each opened valve has already accounted for future
 # flow till time runs out).
 def solve(time, best, u="AA", flow=0, opened=0):
