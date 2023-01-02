@@ -3,8 +3,6 @@
 
 # Inspired by smrq: https://www.reddit.com/r/adventofcode/comments/zsct8w/2022_day_22_solutions/j184mn7/
 
-import re
-
 # First, some notation: A face is one of the 6 square regions (size x size) in
 # the input grid. No matter how the faces wrap or fold, our coordinate system is
 # aligned to the input grid. The top-left is (0, 0). x (real) increases left to
@@ -110,6 +108,8 @@ import re
 # We do this rotation in solve(), because it's a no-op for the 2-D case (the
 # faces already have the expected edges matching up), thus there's no need to
 # special-case it just for the 3-D case.
+
+import re
 
 DIRS = [1j**i for i in range(4)]
 

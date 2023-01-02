@@ -1,8 +1,6 @@
 # Day 11: Monkey in the Middle
 # https://adventofcode.com/2022/day/11
 
-import copy, itertools, math
-
 # Straight-forward simulation of the throws, using the LCM of the divisors to
 # keep the "worry level" from growing out of control.
 
@@ -31,6 +29,8 @@ import copy, itertools, math
 # and multiplication operations (no "new = old / 26"), so we are good. Part 1
 # does involve division (by 3), so we _cannot_ use modular arithmetic there. See
 # the commit description for an example where using it gives the wrong answer.
+
+import copy, itertools, math
 
 items, ops, mods, targets = [], [], [], []
 for monkey in open(0).read().split("\n\n"):

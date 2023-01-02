@@ -1,8 +1,6 @@
 # Day 21: Monkey Math
 # https://adventofcode.com/2022/day/21
 
-import operator, re
-
 # Part 1 is straight-forward depth-first resolution of the formulas.
 
 # For Part 2, say the unknown value is "x". After resolving the formulas, assume
@@ -16,6 +14,8 @@ import operator, re
 # This lets us do normal arithmetic calculations as in Part 1. To solve:
 #     diff = LHS - RHS = (a - p) + (b - q) * i
 #     answer = (p - a) / (b - q) = -diff.real / diff.imag
+
+import operator, re
 
 OPS = {"+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.truediv}
 

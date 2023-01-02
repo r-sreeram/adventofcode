@@ -3,8 +3,6 @@
 
 # Inspired by juanplopes: https://www.reddit.com/r/adventofcode/comments/zn6k1l/2022_day_16_solutions/j0hrdpt/
 
-import collections, math, re
-
 # For Part 1, we can do a simple depth-first search (DFS), made slightly more
 # efficient by precomputing all pairwise distances between rooms that have some
 # flow, and considering only those rooms in the search. Along the way, we keep
@@ -19,6 +17,8 @@ import collections, math, re
 # be disjoint, since we can't open the same valve twice (hence k1 & k2 == 0).
 
 # There are alternative approaches, but this turns out to be the fastest.
+
+import collections, math, re
 
 # bits and rate are not populated for rooms with zero flow.
 rate, edge, bits = {}, {}, {}

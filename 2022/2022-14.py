@@ -3,12 +3,12 @@
 
 # Inspired by 4HbQ: https://www.reddit.com/r/adventofcode/comments/zli1rd/2022_day_14_solutions/j061f6z/
 
-import itertools, re
-
 # Aside from the straight-forward simulation, a major optimization here is to
 # start the next unit of sand at the last position of the previous sand (before
 # it came to rest) instead of all the way back at the top, since it would have
 # traversed the same path until that point anyway.
+
+import itertools, re
 
 grid = set()
 for points in ((int(x) + int(y) * 1j for x, y in re.findall("(\d+),(\d+)", line)) for line in open(0)):

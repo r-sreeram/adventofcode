@@ -3,8 +3,6 @@
 
 # Inspired by i_have_no_biscuits: https://www.reddit.com/r/adventofcode/comments/zmcn64/2022_day_15_solutions/j0b90nr/
 
-import itertools, re
-
 # Part 1 involves counting points along a line. These points are collected from
 # multiple (possibly overlapping) intervals, where each interval is a subset of
 # the coverage area of some sensor. One way to avoid double-counting points that
@@ -19,6 +17,8 @@ import itertools, re
 # find it by finding all possible intersections amongst all the lines that form
 # these outer diamonds. Since all the lines form two sets of parallel lines, we
 # only need to intersect a line with every line from the other set.
+
+import itertools, re
 
 distance = lambda x1, y1, x2, y2: abs(x1 - x2) + abs(y1 - y2)
 

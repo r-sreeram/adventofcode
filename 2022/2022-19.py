@@ -3,8 +3,6 @@
 
 # Inspired by Boojum: https://www.reddit.com/r/adventofcode/comments/zpihwi/2022_day_19_solutions/j0tls7a/
 
-import re
-
 # The algorithm for both parts is essentially a brute-force depth-first search.
 # The search space is huge (especially for Part 2), so we make it tractable with
 # a few optimizations:
@@ -42,6 +40,8 @@ import re
 #   requirements) to make some type of robot, we are good. Hence:
 #       if (... a < (max(...) - p) * (t - 2) and ...):  # make an ore robot
 #   Likewise for clay and obsidian capacity.
+
+import re
 
 ORE, CLAY, OBSIDIAN, GEODE = 1, 2, 4, 8
 
