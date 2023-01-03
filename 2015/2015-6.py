@@ -9,9 +9,8 @@ def solve(ops, instructions=list(open(0))):
     for line in instructions:
         command = line[: line.index(" ", 5)]
         r1, c1, r2, c2 = (int(n) for n in re.findall("\d+", line))
-        for r in range(r1, r2 + 1):
-            for c in range(c1, c2 + 1):
-                lights[r][c] = ops[command](lights[r][c])
+        for r, c in itertools.product(range(r1, r2 + 1), range(c1, c2 + 1)):
+            lights[r][c] = ops[command](lights[r][c])
     print(sum(itertools.chain(*lights)))
 
 
