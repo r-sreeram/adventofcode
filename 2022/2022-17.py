@@ -51,25 +51,25 @@ tower, height, count = set(), 0, 0
 seen, cycle_count, cycle_height = {}, 0, 0
 target_counts = [2022, 1000000000000]
 while target_counts:
-    while count + cycle_count < target_counts[0]:
-        d = -1 if jet[j] == "<" else 1
-        if can_place(ROCKS[i], pos + d):
-            pos += d
-        j = (j + 1) % len(jet)
-        if can_place(ROCKS[i], pos - 1j):
-            pos -= 1j
-            continue
-        tower.update(pos + d for d in ROCKS[i])
-        height = max([height] + [int((pos + d).imag) + 1 for d in ROCKS[i]])
-        i = (i + 1) % len(ROCKS)
-        pos = complex(2, height + 3)
-        count += 1
-        if (i, j) in seen:
-            prev_count, prev_height = seen[i, j]
-            batch_size = count - prev_count
-            reps = (target_counts[0] - count - cycle_count) // batch_size
-            cycle_count += batch_size * reps
-            cycle_height += (height - prev_height) * reps
-        seen[i, j] = count, height
-    print(height + cycle_height)
-    del target_counts[0]
+    d = -1 if jet[j] == "<" else 1
+    if can_place(ROCKS[i], pos + d):
+        pos += d
+    j = (j + 1) % len(jet)
+    if can_place(ROCKS[i], pos - 1j):
+        pos -= 1j
+        continue
+    tower.update(pos + d for d in ROCKS[i])
+    height = max([height] + [int((pos + d).imag) + 1 for d in ROCKS[i]])
+    i = (i + 1) % len(ROCKS)
+    pos = complex(2, height + 3)
+    count += 1
+    if (i, j) in seen:
+        prev_count, prev_height = seen[i, j]
+        batch_size = count - prev_count
+        reps = (target_counts[0] - count - cycle_count) // batch_size
+        cycle_count += batch_size * reps
+        cycle_height += (height - prev_height) * reps
+    seen[i, j] = count, height
+    if count + cycle_count == target_counts[0]:
+        print(height + cycle_height)
+        del target_counts[0]
