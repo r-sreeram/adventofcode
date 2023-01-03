@@ -22,7 +22,7 @@ function run() {
   for input in $year/$day/*-input.txt; do
     name=$(basename $input -input.txt)
     echo -n " | $name"
-    { time PYTHONPATH=. /opt/homebrew/bin/python3.11 -O $year/$year-$day.py < $input >/tmp/aoc.out; } 2>/tmp/aoc.time
+    { time PYTHONPATH=lib /opt/homebrew/bin/python3.11 -O $year/$year-$day.py < $input >/tmp/aoc.out; } 2>/tmp/aoc.time
     echo -n " ($(</tmp/aoc.time)s)"
     diff $year/$day/$name-output.txt /tmp/aoc.out &>/dev/null || { echo " FAILED"; exit; }
   done
