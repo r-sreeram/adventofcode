@@ -37,5 +37,4 @@ while path:
     except StopIteration:
         pass
     grid.add(path.pop())
-print(part1)
-print(len(grid) - start)
+print(part1, len(grid) - start, sep="\n")

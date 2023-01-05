@@ -80,5 +80,4 @@ for line in open(0):
     part1 += id * solve(24)
     if id <= 3:
         part2 *= solve(32)
-print(part1)
-print(part2)
+print(part1, part2, sep="\n")

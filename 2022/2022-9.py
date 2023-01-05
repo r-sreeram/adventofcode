@@ -16,5 +16,4 @@ for d, n in (line.split() for line in open(0)):
                 knot[i + 1] = move(knot[i].real, knot[i + 1].real) + move(knot[i].imag, knot[i + 1].imag) * 1j
         part1.add(knot[1])
         part2.add(knot[9])
-print(len(part1))
-print(len(part2))
+print(len(part1), len(part2), sep="\n")

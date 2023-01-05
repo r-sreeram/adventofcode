@@ -17,5 +17,4 @@ for r, c in itertools.product(range(len(rows)), range(len(cols))):
     tree_lines = rows[r][c:], rows[r][c::-1], cols[c][r:], cols[c][r::-1]
     part1 += any(is_visible(trees) for trees in tree_lines)
     part2 = max(part2, math.prod(view_distance(trees) for trees in tree_lines))
-print(part1)
-print(part2)
+print(part1, part2, sep="\n")

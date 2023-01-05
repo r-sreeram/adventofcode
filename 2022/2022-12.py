@@ -9,12 +9,11 @@
 grid = {c + r * 1j: ord(char) - ord("a") for r, row in enumerate(open(0)) for c, char in enumerate(row)}
 S, E = (next(k for k, v in grid.items() if v == ord(char) - ord("a")) for char in "SE")
 grid[S], grid[E] = 0, 25
-best, dist, seen, poss = 0, 0, {E}, {E}
+part1, part2, seen, poss = 0, 0, {E}, {E}
 while S not in poss:
-    dist += 1
+    part1 += 1
     poss = {p1 for p2 in poss for d in (-1, 1, -1j, 1j) if (p1 := p2 + d) in grid and grid[p2] <= grid[p1] + 1} - seen
     seen |= poss
-    if best == 0 and any(grid[p] == 0 for p in poss):
-        best = dist
-print(dist)
-print(best)
+    if part2 == 0 and any(grid[p] == 0 for p in poss):
+        part2 = part1
+print(part1, part2, sep="\n")

@@ -6,5 +6,4 @@
 
 stream = input()
 pos = lambda n: next(i for i in range(n, len(stream) + 1) if len(set(stream[i - n : i])) == n)
-print(pos(4))
-print(pos(14))
+print(pos(4), pos(14), sep="\n")
